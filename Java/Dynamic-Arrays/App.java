@@ -18,7 +18,18 @@ public class App {
     
         DynamicArrays list = new DynamicArrays();
         list.add("shikaa");
-        System.out.println(list.get_capacity()); 
+        // System.out.println(list.size()); 
+        // System.out.println(list.get_capacity());
+        // System.out.println(list.removeAt(0));
+        // System.out.println(list.get_capacity()); 
+        // System.out.println(list.size());
+        list.add("A");
+        list.add("V");
+        list.add("B");
+        list.remove("B");
+        // System.out.println(list.get_capacity()); 
+        // System.out.println(list.size());
+        list.print();
     
     }
 

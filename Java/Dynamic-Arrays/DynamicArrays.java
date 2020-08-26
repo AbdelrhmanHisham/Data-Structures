@@ -30,6 +30,7 @@ public class DynamicArrays<T>{
     
 
     public T get(int index){
+        if (index < 0 || index >= len)throw new IndexOutOfBoundsException();
         return Darr[index];
     }
     
@@ -62,18 +63,82 @@ public class DynamicArrays<T>{
             {
                 capacity=1;
             }else{
-        capacity *=2;   
+        capacity *=2;  
+            } 
         T[] new_Darr = (T[])new Object[capacity]; //create a new one with double size
         for (int i =0 ; i < len ; i++){
             new_Darr[i] = Darr[i];
         }
+
         Darr = new_Darr;
-    } 
+     
         }
+
         Darr[len++] = element;
     }
 
+    public T removeAt(int index){
+        if (index < 0 || index >= len)throw new IndexOutOfBoundsException();
 
+        T temp = Darr[index];
+        T[] new_Darr = (T[])new Object[len-1];
+        int j=0;
+        for (int i=0 ; i < len ; i++){
+            if (i == index){
+                j--;}
+                else{
+            new_Darr[j]=Darr[i];
+            j++;
+        }
     
+    }
+    len--;
+    capacity = len;
+    Darr = new_Darr;
+return temp;
+    } 
 
+
+    public boolean remove(Object obj){
+
+    int index = indexOf(obj);
+    boolean return_value;
+    if (index != -1){
+    removeAt(index);
+
+    return_value = true;
+    }else {
+        return_value =false;
+    }
+
+    return return_value;
+    } 
+ 
+    
+    public int indexOf(Object obj){
+    int index;
+    for (int i=0 ; i < len ; i++)
+    {
+    if (Darr[i].equals(obj)){
+        index  = i;
+        return index;
+    }}
+
+    return -1;
+    
+}
+
+ 
+    
+    
+public boolean contains(Object obj) {
+    return indexOf(obj) != -1;
+  }
+
+
+  public void print(){
+      for (int i=0 ; i< len ; i++){
+          System.out.println(Darr[i]);
+      }
+  }
 }
