@@ -1,4 +1,4 @@
-public class LinkedList<T> {
+public class LinkedList<T> implements Iterable<T>{
   public int size;
   private node<T> head = null;
   private node<T> tail = null;
@@ -117,4 +117,133 @@ public class LinkedList<T> {
     System.out.println("LinkedList of Size : "+counter);
   }
 
+
+  private T remove (node<T> Node){
+
+    if (Node.prev == null){
+      return removeFirst();
+    }
+
+    if (Node.next == null){
+      return removeLast();
+    }
+
+    Node.prev.next = Node.next;
+    Node.next.prev = Node.prev;
+
+    T data = Node.data;
+    Node.data = null;
+    Node.prev = Node.next = null;
+    return data;
+  }
+
+  public T removeAt(int index){
+    if (index < 0 || index >= size ){
+      throw new IllegalArgumentException();
+    }
+
+    node<T> trav = null;
+    if (index <= size/2){
+      trav = head;
+      for(int i = 0 ; i != index ; i++){
+        trav = trav.next;
+    } 
+    }else{
+      trav = tail;
+      for(int i = size-1; i != index ; i--){
+        trav = trav.prev;
+
+    } 
+    }
+
+    return remove(trav);
+  }
+
+  public int indexOf(Object Data){
+
+    node<T> trav = head;
+    if (Data == null){
+      for (int i = 0 ; i < size ;i++){
+
+        if (trav.data == null){
+          return i;
+        }
+        trav = trav.next;
+      }
+    }else {
+      for (int i = 0 ; i < size ;i++){
+
+        if (Data.equals(trav.data)){
+          return i;
+        }
+        trav = trav.next;
+
+    }
+    
+  }
+  return -1;
+ 
+
+
+}
+ public boolean remove(Object obj){
+   int index = indexOf(obj);
+   if (index == -1){
+     return false;
+   }else{
+     removeAt(index);
+     return true;
+   }
+ } 
+ public boolean contains(Object obj){
+
+  return indexOf(obj) != -1;
+ }
+
+
+@Override
+public java.util.Iterator<T> iterator() {
+  return new java.util.Iterator<T>() {
+    private node<T> trav = head;
+
+    @Override
+    public T next(){
+      T data = trav.data;
+      trav = trav.next;
+      return data;
+    }
+
+    @Override
+    public boolean hasNext(){
+      if (trav != null){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+
+    @Override
+    public void remove(){
+      throw new UnsupportedOperationException();
+    }
+
+  };
+}
+
+@Override
+  public String toString() {
+    node<T> trav = head;
+    StringBuilder sb = new StringBuilder();
+    sb.append("[");
+    for(int i =0 ; i < size ; i++){
+      sb.append(trav.data);
+      trav = trav.next;
+      if (i < (size-1)){
+      sb.append(",");}
+    }
+    sb.append("]");
+    return sb.toString();
+
+  }
 }

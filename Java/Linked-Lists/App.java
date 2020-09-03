@@ -1,8 +1,10 @@
+import java.util.Iterator;
 public class App{
 
 
     public static void main(String[] args){
         LinkedList list = new LinkedList();
+        Iterator it = list.iterator();
 
         list.addLast("a");
         list.addLast("b");
@@ -10,14 +12,11 @@ public class App{
         list.addLast("d");
         list.addLast("e");
         list.addLast("f");
-        // list.print(list);
-        // list.addFirst("shikaa");
-        // list.print(list);
-        list.removeLast();
-        list.print(list);   
 
-        System.out.println(list.peekFirst());
-        System.out.println(list.peekLast());
+        // System.out.println(list.toString());   
+
+        System.out.println(it.next());
+
 
     }
 }
