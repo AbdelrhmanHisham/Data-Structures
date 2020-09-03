@@ -204,10 +204,17 @@ public class LinkedList<T> implements Iterable<T>{
 @Override
 public java.util.Iterator<T> iterator() {
   return new java.util.Iterator<T>() {
+    int counter = 0;
     private node<T> trav = head;
 
     @Override
     public T next(){
+      if (counter==0){
+        trav = head;
+        counter++;
+      }else{
+        counter++;
+      }
       T data = trav.data;
       trav = trav.next;
       return data;
@@ -215,6 +222,13 @@ public java.util.Iterator<T> iterator() {
 
     @Override
     public boolean hasNext(){
+      if (counter==0){
+        trav = head;
+        counter++;
+      }else{
+        counter++;
+      }
+
       if (trav != null){
         return true;
       }else{
