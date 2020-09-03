@@ -18,7 +18,7 @@ public class Stack<T>implements Iterable<T>{
     }
 
     public void push(T elm){
-        list.offerFirst(elm);       
+        list.offerFirst(elm); //add from head of the linkedlist      
     }
 
     public T pop(){
