@@ -44,6 +44,7 @@ public class BinaryMinHeap<T extends Comparable<T>> {
     }
   }
 
+  
   //**********************Helper Private Functions************************************************** */
   //   return true if node at index i  is smaller than the one at j
   private boolean less(int i, int j) {
